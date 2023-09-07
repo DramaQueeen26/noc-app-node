@@ -1,3 +1,13 @@
-export const name: string = 'Mari'
+import { ServerApp } from "./presentation/server-app"
 
-console.log(name);
+(async() => {
+
+  main()
+
+})()
+
+function main() {
+
+  ServerApp.start()
+
+}
