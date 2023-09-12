@@ -1,3 +1,4 @@
+import { envs } from "../config/plugins/env.plugin";
 import { CheckService } from "../domain/use-cases/checks/check.service";
 import { FileSystemDatasource } from "../infrastructure/datasources/file-system.datasource";
 import { LogRepositoryImpl } from "../infrastructure/repositories/log.repository";
@@ -14,7 +15,7 @@ export class ServerApp {
     CronService.createJob(
       '*/5 * * * * *',
       () => {
-        const url = 'https://google.com'
+        const url = envs.URL
         new CheckService(
           fileSystemLogRepository,
           () => console.log(`${ url } is working`),
