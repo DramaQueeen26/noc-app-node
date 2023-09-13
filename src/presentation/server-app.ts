@@ -3,6 +3,7 @@ import { CheckService } from "../domain/use-cases/checks/check.service";
 import { FileSystemDatasource } from "../infrastructure/datasources/file-system.datasource";
 import { LogRepositoryImpl } from "../infrastructure/repositories/log.repository";
 import { CronService } from "./cron/cron.service";
+import { EmailService } from "./email/email.service";
 
 const fileSystemLogRepository = new LogRepositoryImpl( new FileSystemDatasource() )
 
@@ -12,17 +13,26 @@ export class ServerApp {
 
     console.log('Server started...');
 
-    CronService.createJob(
-      '*/5 * * * * *',
-      () => {
-        const url = envs.URL
-        new CheckService(
-          fileSystemLogRepository,
-          () => console.log(`${ url } is working`),
-          ( error ) => console.log( error )
-        ).execute( url )
-      }
-    )
+    const emailService = new EmailService()
+    emailService.sendEmail({
+      to: 'mariangel.yajure@gmail.com',
+      subject: 'test',
+      html: `
+        <h3>Logs del sistema </h3>
+      `
+    })
+
+    // CronService.createJob(
+    //   '*/5 * * * * *',
+    //   () => {
+    //     const url = envs.URL
+    //     new CheckService(
+    //       fileSystemLogRepository,
+    //       () => console.log(`${ url } is working`),
+    //       ( error ) => console.log( error )
+    //     ).execute( url )
+    //   }
+    // )
 
   }
 
