@@ -14,13 +14,7 @@ export class ServerApp {
     console.log('Server started...');
 
     const emailService = new EmailService()
-    emailService.sendEmail({
-      to: 'mariangel.yajure@gmail.com',
-      subject: 'test',
-      html: `
-        <h3>Logs del sistema </h3>
-      `
-    })
+    emailService.sendEmailWithFileSystemLogs('mariangel.yajure@gmail.com')
 
     // CronService.createJob(
     //   '*/5 * * * * *',
