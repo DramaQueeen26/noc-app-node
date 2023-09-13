@@ -25,33 +25,17 @@ export class EmailService {
     }
   })
 
-  constructor(
-    private readonly logRepository: LogRepository
-  ) {}
-
   async sendEmail( options: SendMailOptions ): Promise<boolean> {
 
     const { to, subject, html, attachments = [] } = options
 
     try {
 
-      const sendInformation = await this.transporter.sendMail({ to, subject, html, attachments })
-
-      this.logRepository.saveLog( new LogEntity({
-        message: `Email sent`, 
-        level: LogSeverityLevel.low, 
-        origin: 'email.service.ts'
-      }))
+      await this.transporter.sendMail({ to, subject, html, attachments })
 
       return true
     
     } catch (error) {
-
-      this.logRepository.saveLog( new LogEntity({
-        message: `Email not sent`, 
-        level: LogSeverityLevel.high, 
-        origin: 'email.service.ts'
-      }))
     
       return false
     
