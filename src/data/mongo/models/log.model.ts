@@ -3,6 +3,7 @@ import { Schema, model } from "mongoose";
 const logSchema = new Schema({
 
   level: {
+    type: String,
     enum: ['low', 'medium', 'high'],
     default: 'low'
   },
