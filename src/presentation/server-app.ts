@@ -15,7 +15,7 @@ export class ServerApp {
 
     console.log('Server started...');
 
-    new SendEmailLogs( emailService, fileSystemLogRepository ).execute('mariangel.yajure@gmail.com')
+    // new SendEmailLogs( emailService, fileSystemLogRepository ).execute('mariangel.yajure@gmail.com')
 
     // CronService.createJob(
     //   '*/5 * * * * *',
