@@ -1,5 +1,5 @@
-import mongoose from 'mongoose';
-import { MongoDatabase } from './init';
+import mongoose from 'mongoose'
+import { MongoDatabase } from './init'
 
 
 
@@ -7,7 +7,7 @@ describe('init MongoDB', () => {
 
 
   afterAll(() => {
-    mongoose.connection.close();
+    mongoose.connection.close()
   })
 
 
@@ -16,11 +16,11 @@ describe('init MongoDB', () => {
     const connected = await MongoDatabase.connect({
       dbName: process.env.MONGO_DB_NAME!,
       mongoUrl: process.env.MONGO_URL!,
-    });
+    })
 
-    expect(connected).toBe(true);
+    expect(connected).toBe(true)
 
-  });
+  })
 
 
   test('should throw an error', async()=> {
@@ -29,8 +29,8 @@ describe('init MongoDB', () => {
       const connected = await MongoDatabase.connect({
         dbName: process.env.MONGO_DB_NAME!,
         mongoUrl: 'mongodb+srv:',
-      });
-      expect(true).toBe(false);
+      })
+      expect(true).toBe(false)
     } catch (error) {
       
     }

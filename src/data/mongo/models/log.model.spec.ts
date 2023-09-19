@@ -1,9 +1,7 @@
-import mongoose from 'mongoose';
-import { envs } from '../../../config/plugins/env.plugin';
-import { MongoDatabase } from '../init';
-import { LogModel } from './log.model';
-
-
+import mongoose from 'mongoose'
+import { envs } from '../../../config/plugins/env.plugin'
+import { MongoDatabase } from '../init'
+import { LogModel } from './log.model'
 
 describe('log.model.test.ts', () => {
 
@@ -15,9 +13,8 @@ describe('log.model.test.ts', () => {
   })
 
   afterAll(() => {
-    mongoose.connection.close();
+    mongoose.connection.close()
   })
-
 
   test('should return LogModel', async() => {
 
@@ -27,7 +24,7 @@ describe('log.model.test.ts', () => {
       level: 'low'
     }
 
-    const log = await LogModel.create( logData );
+    const log = await LogModel.create( logData )
     
     expect( log ).toEqual( expect.objectContaining({
       ...logData,
@@ -36,15 +33,13 @@ describe('log.model.test.ts', () => {
     }))
 
 
-    await LogModel.findByIdAndDelete( log.id );
+    await LogModel.findByIdAndDelete( log.id )
 
-
-  });
-
+  })
 
   test('should return the schema object', () => {
 
-    const schema = LogModel.schema.obj;
+    const schema = LogModel.schema.obj
 
     expect( schema ).toEqual( expect.objectContaining(
       {
@@ -59,11 +54,6 @@ describe('log.model.test.ts', () => {
       }
     ))
 
-    
-
-
-  });
-
-
-
-});
+  })
+  
+})
