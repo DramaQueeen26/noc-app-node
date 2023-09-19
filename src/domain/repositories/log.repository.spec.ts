@@ -1,5 +1,5 @@
 import { LogEntity, LogSeverityLevel } from '../entities/log.entity';
-import { LogDatasource } from './log.datasource';
+import { LogRepository } from './log.repository';
 
 
 describe('log.datasource.ts LogDatasource', ()=> {
@@ -10,7 +10,7 @@ describe('log.datasource.ts LogDatasource', ()=> {
     level: LogSeverityLevel.low
   })
 
-  class MockLogDatasource implements LogDatasource {
+  class MockLogRepository implements LogRepository {
 
     async saveLog( log: LogEntity ): Promise<void> {
       return;
@@ -23,14 +23,14 @@ describe('log.datasource.ts LogDatasource', ()=> {
 
   test('should test the abstract class', async() => {
 
-    const mockLogDatasource = new MockLogDatasource();
+    const mockLogRepository = new MockLogRepository();
 
-    expect( mockLogDatasource ).toBeInstanceOf( MockLogDatasource );
-    expect( typeof mockLogDatasource.saveLog ).toBe( 'function' );
-    expect( typeof mockLogDatasource.getLogs ).toBe( 'function' );
+    expect( mockLogRepository ).toBeInstanceOf( MockLogRepository );
+    expect( typeof mockLogRepository.saveLog ).toBe( 'function' );
+    expect( typeof mockLogRepository.getLogs ).toBe( 'function' );
 
-    await mockLogDatasource.saveLog( newLog );
-    const logs = await mockLogDatasource.getLogs( LogSeverityLevel.high );
+    await mockLogRepository.saveLog( newLog );
+    const logs = await mockLogRepository.getLogs( LogSeverityLevel.high );
     expect( logs ).toHaveLength(1)
     expect( logs[0]).toBeInstanceOf( LogEntity );
 
